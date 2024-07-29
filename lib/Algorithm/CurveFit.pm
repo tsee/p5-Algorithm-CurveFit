@@ -162,7 +162,7 @@ sub curve_fit {
                     my $value = $deriv->($xv, @par_values);
                     if (not defined $value) { # fall back to numeric five-point stencil
                         my $h = SQRT_EPS*$xv; my $t = $xv + $h; $h = $t-$xv; # numerics. Cf. NR
-                        $value = $formula_sub->($xv, @parameters)
+                        $value = $formula_sub->($xv, map { $_->[1] } @parameters)
                     }
                     push @ary, $value;
                 }
@@ -177,7 +177,7 @@ sub curve_fit {
                     );
                     if (not defined $value) { # fall back to numeric five-point stencil
                         my $h = SQRT_EPS*$xv; my $t = $xv + $h; $h = $t-$xv; # numerics. Cf. NR
-                        $value = $formula_sub->($xv, @parameters)
+                        $value = $formula_sub->($xv, map { $_->[1] } @parameters)
                     }
                     push @ary, $value;
                 }
